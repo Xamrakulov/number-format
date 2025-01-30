@@ -1,0 +1,31 @@
+{
+  "name": "@xamrakulov/number-format",
+  "version": "1.0.0",
+  "description": "JS/TS библиотека для форматирования номеров телефона и валют с автоопределением страны",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node dist/index.js",
+    "test:jest": "jest"
+  },
+  "keywords": [
+    "phone",
+    "currency",
+    "formatter",
+    "typescript"
+  ],
+  "author": "Xamrakulov",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xamrakulov/number-format.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.12.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.2.2"
+  }
+}

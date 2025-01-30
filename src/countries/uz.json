@@ -1,0 +1,128 @@
+{
+  "country": "Uzbekistan",
+  "region": "Asia",
+  "phone": {
+    "entities": [
+      {
+        "type": "prefix",
+        "offset": 0,
+        "length": 3
+      },
+      {
+        "type": "operator_code",
+        "offset": 3,
+        "length": 2
+      },
+      {
+        "type": "number",
+        "offset": 5,
+        "length": 3
+      },
+      {
+        "type": "number",
+        "offset": 8,
+        "length": 2
+      },
+      {
+        "type": "number",
+        "offset": 10,
+        "length": 2
+      }
+    ],
+    "prefix": 998,
+    "length": 12,
+    "operators": [
+      {
+        "operator": "OQ",
+        "legal": "Unitel LLC",
+        "technologies": ["GSM"],
+        "codes": [20],
+        "types": "mobile",
+        "length": 2
+      },
+      {
+        "operator": "Humans",
+        "legal": "Humans LLC",
+        "technologies": ["GSM"],
+        "codes": [33],
+        "type": "mobile",
+        "length": 2
+      },
+      {
+        "operator": "Uztelecom",
+        "legal": "Uztelecom JSC",
+        "technologies": ["VoIP"],
+        "codes": [55],
+        "type": "ip",
+        "length": 2
+      },
+      {
+        "operator": "Uztelecom",
+        "legal": "Uztelecom JSC",
+        "technologies": ["fixed"],
+        "codes": [61, 62, 65, 66, 67, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79],
+        "type": "geographic",
+        "length": 2
+      },
+      {
+        "operator": "Ucell",
+        "legal": "Coscom LLC",
+        "technologies": ["GSM"],
+        "codes": [50, 93, 94],
+        "type": "mobile",
+        "length": 2
+      },
+      {
+        "operator": "Uzmobile",
+        "legal": "Uztelecom LLC",
+        "technologies": ["GSM"],
+        "codes": [77, 99],
+        "type": "mobile",
+        "length": 2
+      },
+      {
+        "operator": "Uzmobile",
+        "legal": "Uztelecom JSC",
+        "technologies": ["GSM","CDMA"],
+        "codes": [95],
+        "type": "mobile",
+        "length": 2
+      },
+      {
+        "operator": "Mobiuz",
+        "legal": "UMS LLC",
+        "technologies": ["GSM"],
+        "codes": [88, 97],
+        "type": "mobile",
+        "length": 2
+      },
+      {
+        "operator": "Beeline",
+        "legal": "Unitel LLC",
+        "technologies": ["GSM"],
+        "codes": [90, 91],
+        "type": "mobile",
+        "length": 2
+      },
+      {
+        "operator": "Perfectum Mobile",
+        "legal": "RWC LLC",
+        "technologies": ["CDMA"],
+        "codes": [98],
+        "type": "mobile",
+        "length": 2
+      }
+    ]
+  },
+  "currency": {
+    "code": "UZS",
+    "name": "Uzbekistan som",
+    "symbol": "UZS",
+    "symbol_offset": "right",
+    "minor": 100,
+    "format": {
+      "thousands": ",",
+      "decimal": "."
+    }
+  }
+}
