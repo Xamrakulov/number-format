@@ -15,6 +15,11 @@
     "formatter",
     "typescript"
   ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "author": "Xamrakulov",
   "repository": {
     "type": "git",
