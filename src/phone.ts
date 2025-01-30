@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-const config = require("../numberformat.config");
+const config = require("../number-format.config");
 
 const countriesPath = path.join(__dirname, "countries");
 const countryData: Record<string, any> = {};
@@ -14,7 +14,7 @@ fs.readdirSync(countriesPath).forEach((file) => {
     }
 });
 
-const format = (number: string): Promise<any> => {
+const format = (number: string): Promise<string> => {
     return new Promise((resolve, reject) => {
         number = number.replace(/\D/g, "");
 
@@ -71,7 +71,7 @@ const format = (number: string): Promise<any> => {
     });
 }
 
-const data = (number: string): Promise<any> => {
+const data = (number: string): Promise<object> => {
     return new Promise((resolve, reject) => {
         number = number.replace(/\D/g, "");
         for (const country in countryData) {
@@ -111,7 +111,7 @@ export const phone = {
     data
 }
 
-export default function (number: string): Promise<{ format: any, data: any }> {
+export default function (number: string): Promise<{ format: Promise<string>, data: Promise<object> }> {
     return new Promise((resolve, reject) => {
         try {
             if (!number || number.length < 7) {

@@ -11,5 +11,7 @@
     "skipLibCheck": true
   },
   "include": ["src", "numberformat.config.d.ts"],
-  "exclude": ["node_modules", "numberformat.config.js"],
+  "exclude": ["node_modules",
+    "src/number-format.config.js"
+  ],
 }

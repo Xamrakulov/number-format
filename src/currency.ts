@@ -1,23 +1,35 @@
 import countries from "./countries";
-const config = require("../numberformat.config");
+const config = require("../number-format.config");
 
-export function currency(amount: number, countryCode?: string): string {
-    const code = countryCode || config.defaultCountry;
+export function currency(amount: number, countryCode?: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const code = countryCode || config.defaultCountry;
 
-    if (!countries[code]) {
-        throw new Error(`Страна ${code} не найдена`);
-    }
+        if (!countries[code]) {
+            return reject(new Error(`Страна ${code} не найдена`));
+        }
 
-    const { currency } = countries[code];
-    const { symbol, symbol_offset, format } = currency;
+        let { currency } = countries[code];
 
-    // Форматируем число с разделителями
-    const formattedNumber = amount.toLocaleString("en-US", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-        useGrouping: true
-    }).replace(",", format.thousands).replace(".", format.decimal);
+        if (config.currency && config.currency[code]) {
+            currency = {
+                ...currency,
+                ...config.currency[code],
+                format: {
+                    ...currency.format,
+                    ...config.currency[code].format,
+                },
+            };
+        }
 
-    // Определяем, куда ставить символ валюты
-    return symbol_offset === "left" ? `${symbol} ${formattedNumber}` : `${formattedNumber} ${symbol}`;
+        const { symbol, symbol_offset, format } = currency;
+
+        const formattedNumber = amount.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            useGrouping: true
+        }).replace(",", format.thousands).replace(".", format.decimal);
+
+        resolve(symbol_offset === "left" ? `${symbol} ${formattedNumber}` : `${formattedNumber} ${symbol}`);
+    });
 }
