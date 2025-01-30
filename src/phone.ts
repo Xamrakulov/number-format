@@ -14,36 +14,43 @@ fs.readdirSync(countriesPath).forEach((file) => {
     }
 });
 
-const format = (number: string): string => {
-    // Убираем все нецифровые символы
-    number = number.replace(/\D/g, "");
+const format = (number: string): Promise<any> => {
+    return new Promise((resolve, reject) => {
+        number = number.replace(/\D/g, "");
 
-    for (const country in countryData) {
-        const { phone } = countryData[country];
+        for (const country in countryData) {
+            const { phone } = countryData[country];
 
-        // Получаем префикс страны и вычисляем длину номера
-        const prefix = phone.prefix.toString();
-        const localLength = phone.length - prefix.length;
+            const prefix = phone.prefix.toString();
+            const localLength = phone.length - prefix.length;
 
-        // Если номер без префикса, то проверяем длину номера и код оператора
-        if (number.length === localLength) {
-            // Проверяем наличие оператора по коду
-            const operator = phone.operators.find((operator: any) =>
-                operator.codes.some((code: string) => number.startsWith(code))
-            );
+            if (number.length === localLength) {
+                const operator = phone.operators.find((operator: any) =>
+                    operator.codes.some((code: string) => number.startsWith(code))
+                );
 
-            if (operator) {
-                // Если оператор найден, добавляем префикс и начинаем форматировать
-                let formattedNumber = '+';
+                if (operator) {
+                    let formattedNumber = '+';
+                    let localNumber = `${prefix}${number}`;
 
-                // Убираем префикс и получаем местный номер
-                let localNumber = `${prefix}${number}`;
+                    phone.entities.forEach((entity: any) => {
+                        const part = localNumber.slice(entity.offset, entity.offset + entity.length);
 
-                // Форматируем номер в зависимости от entities
+                        if (entity.type === "operator_code") {
+                            formattedNumber += `(${part}) `;
+                        } else {
+                            formattedNumber += part + " ";
+                        }
+                    });
+
+                    resolve(formattedNumber.trim());
+                }
+            } else if (number.startsWith(prefix)) {
+                let formattedNumber = `+`;
+
                 phone.entities.forEach((entity: any) => {
-                    const part = localNumber.slice(entity.offset, entity.offset + entity.length);
+                    const part = number.slice(entity.offset, entity.offset + entity.length);
 
-                    // Если это операторский код, то помещаем в скобки
                     if (entity.type === "operator_code") {
                         formattedNumber += `(${part}) `;
                     } else {
@@ -51,77 +58,72 @@ const format = (number: string): string => {
                     }
                 });
 
-                return formattedNumber.trim();
+                resolve(formattedNumber.trim());
             }
-        } else if (number.startsWith(prefix)) {
-            // Если номер уже начинается с префикса, начинаем с местной части
-            let formattedNumber = `+`;
-
-            // Форматируем номер в зависимости от entities
-            phone.entities.forEach((entity: any) => {
-                const part = number.slice(entity.offset, entity.offset + entity.length);
-
-                // Если это операторский код, то помещаем в скобки
-                if (entity.type === "operator_code") {
-                    formattedNumber += `(${part}) `;
-                } else {
-                    formattedNumber += part + " ";
-                }
-            });
-
-            return formattedNumber.trim();
         }
-    }
 
-    // Если не удалось определить страну, используем дефолтную из `numberformat.config.js`
-    const defaultPhone = countryData[config.defaultCountry]?.phone;
-    if (defaultPhone) {
-        let formattedNumber = `+${defaultPhone.prefix} ${number.slice(defaultPhone.prefix.toString().length)}`;
-        return formattedNumber;
-    }
+        const defaultPhone = countryData[config.defaultCountry]?.phone;
+        if (defaultPhone) {
+            resolve(`+${defaultPhone.prefix} ${number.slice(defaultPhone.prefix.toString().length)}`);
+        }
 
-    return number; // Возвращаем номер в исходном виде, если ничего не найдено
+        reject("Invalid number");
+    });
 }
 
-const data = (number: string) => {
-    number = number.replace(/\D/g, ""); // Убираем все нецифровые символы
+const data = (number: string): Promise<any> => {
+    return new Promise((resolve, reject) => {
+        number = number.replace(/\D/g, "");
+        for (const country in countryData) {
+            const { phone } = countryData[country];
+            const prefix = phone.prefix.toString();
+            const localLength = phone.length - prefix.length;
 
-    for (const countryCode in countryData) {
-        const { phone } = countryData[countryCode];
+            if (number.length === localLength) {
+                const operator = phone.operators.find((operator: any) =>
+                    operator.codes.some((code: string) => number.startsWith(code))
+                );
 
-        // Проверка, начинается ли номер с префикса страны
-        const prefix = phone.prefix.toString();
-        if (number.startsWith(prefix)) {
-            // Убираем префикс из номера и проверяем на оператора
-            let localNumber = number.slice(prefix.length);
+                if (operator) {
+                    resolve(operator);
+                }
+            } else if (number.startsWith(prefix)) {
+                const operator = phone.operators.find((operator: any) =>
+                    operator.codes.some((code: string) => number.startsWith(code))
+                );
 
-            // Ищем оператора по коду
-            for (const operator of phone.operators) {
-                for (const code of operator.codes) {
-                    if (localNumber.startsWith(code.toString())) {
-                        // Если нашли операторский код, возвращаем информацию
-                        return {
-                            country: countryData[countryCode].country, // Название страны
-                            region: countryData[countryCode].region, // Регион
-                            result: {
-                                name: operator.operator,
-                                legal: operator.legal,
-                                technologies: operator.technologies,
-                                codes: operator.codes,
-                                type: operator.type,
-                                length: operator.length
-                            }
-                        };
-                    }
+                if (operator) {
+                    resolve({
+                        country: countryData[country].name,
+                        region: countryData[country].region,
+                        result: operator
+                    });
                 }
             }
         }
-    }
 
-    return null; // Если оператор не найден
+        reject("Operator not found");
+    });
 }
 
 export const phone = {
     format,
     data
 }
+
+export default function (number: string): Promise<{ format: any, data: any }> {
+    return new Promise((resolve, reject) => {
+        try {
+            if (!number || number.length < 7) {
+                throw new Error("Invalid number"); // Добавляем проверку
+            }
+
+            const formatted = format(number);
+            const operator = data(number);
+
+            resolve({ format: formatted, data: operator });
+        } catch (error) {
+            reject(error);
+        }
+    });
+};

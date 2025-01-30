@@ -1,9 +1,9 @@
 import uz from "./uz.json";
-// Добавь остальные страны
+import kz from "./kz.json";
 
 const countries: Record<string, any> = {
     UZ: uz,
-    // Добавь остальные
+    KZ: kz,
 };
 
 export default countries;

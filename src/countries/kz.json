@@ -1,0 +1,104 @@
+{
+  "country": "Kazakhstan",
+  "region": "Central Asia",
+  "phone": {
+    "entities": [
+      {
+        "type": "prefix",
+        "offset": 0,
+        "length": 1
+      },
+      {
+        "type": "operator_code",
+        "offset": 1,
+        "length": 3
+      },
+      {
+        "type": "number",
+        "offset": 4,
+        "length": 3
+      },
+      {
+        "type": "number",
+        "offset": 7,
+        "length": 2
+      },
+      {
+        "type": "number",
+        "offset": 9,
+        "length": 2
+      }
+    ],
+    "prefix": 7,
+    "length": 11,
+    "operators": [
+      {
+        "operator": "Altel",
+        "legal": "Altel JV JSC",
+        "technologies": ["GSM"],
+        "codes": [700, 708],
+        "types": "mobile",
+        "length": 3
+      },
+      {
+        "operator": "Kcell",
+        "legal": "Kcell JSC",
+        "technologies": ["GSM"],
+        "codes": [701, 702],
+        "types": "mobile",
+        "length": 3
+      },
+      {
+        "operator": "Beeline",
+        "legal": "KaP-Tel LLP",
+        "technologies": ["GSM"],
+        "codes": [704, 771, 776, 777, 764],
+        "types": "mobile",
+        "length": 3
+      },
+      {
+        "operator": "Izi",
+        "legal": "KaP-Tel LLP",
+        "technologies": ["GSM"],
+        "codes": [704, 771, 776, 777],
+        "types": "mobile",
+        "length": 3
+      },
+      {
+        "operator": "Tele2",
+        "legal": "Mobile Telecom-Service LLP",
+        "technologies": ["GSM"],
+        "codes": [707, 747],
+        "types": "mobile",
+        "length": 3
+      },
+      {
+        "operator": "Kazakhtelecom",
+        "legal": "Kazahtelecom JSC",
+        "technologies": ["GSM"],
+        "codes": [703, 704, 709, 750, 751, 760, 761, 762, 763],
+        "types": "mobile",
+        "length": 3
+      },
+      {
+        "operator": "Activ",
+        "legal": "Kcell JSC",
+        "technologies": ["GSM"],
+        "codes": [775, 778],
+        "types": "mobile",
+        "length": 3
+      }
+    ]
+  },
+  "currency": {
+    "code": "KZT",
+    "name": "Kazakhstani tenge",
+    "symbol": "₸",
+    "symbol_offset": "right",
+    "minor": 100,
+    "format": {
+      "thousands": ",",
+      "decimal": "."
+    }
+  }
+}
