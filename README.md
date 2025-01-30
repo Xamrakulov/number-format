@@ -146,7 +146,7 @@ Each country has its own JSON file with information about the number formats and
 | Country                                | Code (ISO 3166-1 Alpha-2) |
 |----------------------------------------|---------------------------|
 | 🇺🇿 Uzbekistan                        | `UZ`                      |
-| 🇰🇿 Kazakhstan                        | `KZ'                      |
+| 🇰🇿 Kazakhstan                        | `KZ`                      |
 | 🌐 Other countries are added gradually | `...`                     | 
 
 ## 📜 License
