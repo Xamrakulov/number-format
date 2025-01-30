@@ -1,6 +1,6 @@
 {
   "name": "@xamrakulov/number-format",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "JS/TS библиотека для форматирования номеров телефона и валют с автоопределением страны",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
