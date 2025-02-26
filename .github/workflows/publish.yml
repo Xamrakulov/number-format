@@ -25,7 +25,9 @@ jobs:
         run: npm run test:jest
 
   publish:
+    needs: test
     runs-on: ubuntu-latest
+    if: success()
 
     steps:
       - name: Checkout repository
