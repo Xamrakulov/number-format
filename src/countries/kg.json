@@ -1,0 +1,94 @@
+{
+  "country": "Kyrgyzstan",
+  "region": "Central Asia",
+  "phone": {
+    "entities": [
+      {
+        "type": "prefix",
+        "offset": 0,
+        "length": 3
+      },
+      {
+        "type": "operator_code",
+        "offset": 3,
+        "length": 3
+      },
+      {
+        "type": "number",
+        "offset": 6,
+        "length": 6
+      }
+    ],
+    "prefix": 996,
+    "length": 12,
+    "operators": [
+      {
+        "operator": "Beeline KG",
+        "legal": "Sky Mobile LLC",
+        "technologies": ["GSM"],
+        "codes": [22, 77],
+        "types": "mobile",
+        "length": 2
+      },
+      {
+        "operator": "Beeline KG",
+        "legal": "Sky Mobile LLC",
+        "technologies": ["GSM"],
+        "codes": [31258],
+        "types": "mobile",
+        "length": 5
+      },
+      {
+        "operator": "O!",
+        "legal": "«Nur Telecom» LLC",
+        "technologies": ["GSM"],
+        "codes": [50, 70],
+        "types": "mobile",
+        "length": 2
+      },
+      {
+        "operator": "MegaCom",
+        "legal": "Alfa Telecom CJSC",
+        "technologies": ["GSM"],
+        "codes": [55, 75],
+        "types": "mobile",
+        "length": 2
+      },
+      {
+        "operator": "MegaCom",
+        "legal": "Alfa Telecom CJSC",
+        "technologies": ["GSM"],
+        "codes": [990, 995, 997, 998],
+        "types": "mobile",
+        "length": 3
+      },
+      {
+        "operator": "Salam",
+        "legal": "Kyrgyztelecom JSC.",
+        "technologies": ["GSM"],
+        "codes": [8801],
+        "types": "mobile",
+        "length": 4
+      },
+      {
+        "operator": "Beeline KG",
+        "legal": "Sky Mobile LLC",
+        "technologies": ["GSM"],
+        "codes": [996],
+        "types": "mobile",
+        "length": 3
+      }
+    ]
+  },
+  "currency": {
+    "code": "KGS",
+    "name": "Kyrgyzstani som",
+    "symbol": "с",
+    "symbol_offset": "right",
+    "minor": 100,
+    "format": {
+      "thousands": ",",
+      "decimal": "."
+    }
+  }
+}

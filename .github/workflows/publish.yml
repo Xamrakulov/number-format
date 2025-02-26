@@ -1,0 +1,51 @@
+name: Test and Publish to npm
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:jest
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Bump version and publish
+        run: |
+          npm version patch -m "chore(release): %s"
+          npm publish
+          git push --follow-tags
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
