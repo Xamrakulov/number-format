@@ -1,6 +1,6 @@
-import { phone } from "../dist";
-import format from "../dist/phone";
-import formater from "../dist";
+import { phone } from "../src";
+import format from "../src/phone";
+import formater from "../src";
 
 
 test("Formatting Uzbekistan phone number", () => {
