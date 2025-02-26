@@ -25,13 +25,13 @@ jobs:
         run: npm run test:jest
 
   publish:
-    needs: test
     runs-on: ubuntu-latest
-    if: success()
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -42,10 +42,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Bump version and publish
-        run: |
-          npm version patch -m "chore(release): %s"
-          npm publish
-          git push --follow-tags
+      - name: Build package
+        run: npm run build
+
+      - name: Publish to npm
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
